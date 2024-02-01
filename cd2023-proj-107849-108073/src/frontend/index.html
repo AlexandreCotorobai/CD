@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>File Upload and Download</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- <style>
+    /* CSS for styling the table and scrollable box */
+    .scrollable-box {
+      max-height: 700px;
+      overflow-y: auto;
+      border: 5px solid #deffdb;
+      padding: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .button {
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style> -->
+</head>
+
+<body style="margin-left: 10rem; margin-right: 10rem;">
+  <h1>Music Converter</h1>
+
+  <!-- File upload area -->
+
+
+  <div style="margin-top: 30px;">
+    <h2>Upload File</h2>
+    <input type="file" id="fileInput">
+    <button class="button" id="uploadButton">Upload</button>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 250px; margin-top: 30px;">
+    <div style="margin-top: 30px;">
+      <h2>Get Music List</h2>
+      <button class="button" id="getList">Get List</button>
+    </div>
+    <div style="margin-top: 30px;">
+      <h2>Reset system</h2>
+      <button class="button" id="reset">Reset</button>
+    </div>
+  </div>
+
+  <!-- <div style="margin-top: 30px;">
+    <h2>Request music processing by ID:</h2>
+    <input id="musicID">
+    <button id="processButton">Process</button>
+  </div> -->
+
+  <!-- Scrollable box with the table -->
+  <div class="scrollable-box" style="margin-top: 30px;">
+    <table id="fileTable" class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Tracks Available</th>
+      </tr>
+    </table>
+  </div>
+
+  <div style="margin-top: 30px;">
+    <h2>Download Music</h2>
+    <h3 id="music_selected"> No music selected</h3>
+    <button class="button" id="download1" value="" onclick="downloadFile(1)">Composite</button>
+    <button class="button" id="download2" value="" onclick="downloadFile(2)">Bass</button>
+    <button class="button" id="download3" value="" onclick="downloadFile(3)">Drums</button>
+    <button class="button" id="download4" value="" onclick="downloadFile(4)">Vocals</button>
+    <button class="button" id="download5" value="" onclick="downloadFile(5)">Other</button>
+  </div>
+  
+  <!-- <div style="display: flex; flex-wrap: wrap; gap: 250px; margin-top: 30px;"> -->
+  <div style="margin-top: 30px;">
+    <h2>Get Job List</h2>
+    <button class="button" id="getJobList">Get List</button>
+  </div>
+
+  <!-- </div> -->
+  <div class="scrollable-box" style="margin-top: 30px;">
+    <table id="fileTable2" class="table">
+      <tr>
+        <th>ID</th>
+        <th>Size</th>
+        <th>Time</th>
+        <th>Music_id</th>
+        <th>Track_id</th>
+      </tr>
+    </table>
+  </div>
+
+  <!-- add 5 downloads buttons with no link-->
+
+</body>
+
+<script>
+  // JavaScript for file upload and table population
+  var fileInput = document.getElementById("fileInput");
+  var uploadButton = document.getElementById("uploadButton");
+  var processButton = document.getElementById("processButton");
+  var file;
+
+  fileInput.addEventListener('change', (event) => {
+    file = event.target.files[0];
+  });
+
+  uploadButton.addEventListener('click', () => {
+    if (file) {
+      uploadFile();
+    }
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    console.log("Resetting database...");
+    fetch('http://192.168.0.100:8000/reset', {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Reset successful!');
+        } else {
+          console.error('Reset failed.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+
+  document.getElementById("getList").addEventListener("click", function () {
+    console.log('Button clicked!'); // debug line
+    fetch('http://192.168.0.100:8000/music', {
+      method: 'GET'
+    })
+      .then(response => {
+        console.log('Fetching...'); // debug line
+
+        return response.json()
+      })
+      .then(data => {
+        console.log(data); // Adicione essa linha para verificar o conteúdo de 'data'
+        // const list = document.getElementById('music-list');
+        const table = document.getElementById('fileTable');
+        // Remove any existing items
+        while (table.rows.length > 1) { // Skip the header row, start from index 1
+          table.deleteRow(1); // Delete the row at index 1 repeatedly until no more rows left
+        }
+        // Add new items
+        i = 1;
+        data.forEach(music => {
+          var row = table.insertRow(-1);
+          
+          // item.textContent = `${music.music_id} - ${music.name} ${estado}`;
+          // Add file name cell
+
+          var idCell = row.insertCell(0);
+          idCell.innerHTML = music.music_id;
+
+          var nameCell = row.insertCell(1);
+          nameCell.innerHTML = music.music_name;
+
+          // Add status cell
+          // var statusCell = row.insertCell(2);
+          // statusCell.innerHTML = estado;
+
+          // Add download button cell
+          var actionCell = row.insertCell(2);
+
+
+          // Add checkboxes cell
+          var checkbox1 = document.createElement("input");
+          checkbox1.type = "checkbox";
+          checkbox1.name = "checkbox1";
+          checkbox1.id = "checkbox1";
+          actionCell.appendChild(checkbox1);
+          var label1 = document.createElement("label");
+          label1.htmlFor = "checkbox1";
+          label1.innerHTML = "Bass";
+          actionCell.appendChild(label1);
+
+          var checkbox2 = document.createElement("input");
+          checkbox2.type = "checkbox";
+          checkbox2.name = "checkbox2";
+          checkbox2.id = "checkbox2";
+          actionCell.appendChild(checkbox2);
+          var label2 = document.createElement("label");
+          label2.htmlFor = "checkbox2";
+          label2.innerHTML = "Drums";
+          actionCell.appendChild(label2);
+
+          var checkbox3 = document.createElement("input");
+          checkbox3.type = "checkbox";
+          checkbox3.name = "checkbox3";
+          checkbox3.id = "checkbox3";
+          actionCell.appendChild(checkbox3);
+          var label3 = document.createElement("label");
+          label3.htmlFor = "checkbox3";
+          label3.innerHTML = "Vocals";
+          actionCell.appendChild(label3);
+
+          var checkbox4 = document.createElement("input");
+          checkbox4.type = "checkbox";
+          checkbox4.name = "checkbox4";
+          checkbox4.id = "checkbox4";
+          actionCell.appendChild(checkbox4);
+          var label4 = document.createElement("label");
+          label4.htmlFor = "checkbox4";
+          label4.innerHTML = "Other";
+          actionCell.appendChild(label4);
+
+          var processButton = document.createElement("button");
+          processButton.innerHTML = "Process";
+          processButton.classList.add("button");
+          processButton.id = "processButton" + i;
+          processButton.onclick = function () {
+            console.log(`Item ${music.music_id} clicked!`);
+            var selectedCheckboxes = {
+              bass: checkbox1.checked,
+              drums: checkbox2.checked,
+              vocals: checkbox3.checked,
+              other: checkbox4.checked
+            };
+            processFile(music, selectedCheckboxes);
+            id_selecionado = music.music_id;
+            // get this button's id
+            downloadbtn = document.getElementById("downloadButton" + id_selecionado);
+            downloadbtn.classList.remove("hidden");
+          };
+
+          var downloadButton = document.createElement("button");
+          downloadButton.innerHTML = "Download";
+          downloadButton.id = "downloadButton" + i;
+          downloadButton.classList.add("button", "hidden");
+
+          downloadButton.onclick = function () {
+            console.log(`Item ${music.music_id} clicked!`);
+            selectdownloadFile(music.music_id);
+          };
+
+          row.appendChild(processButton);
+          row.appendChild(downloadButton);
+          i++;
+        });
+
+        // title.classList.remove('escondido');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+
+  document.getElementById("getJobList").addEventListener("click", function () {
+    console.log('Button clicked!'); // debug line
+    fetch('http://192.168.0.100:8000/job', {
+      method: 'GET'
+    })
+      .then(response => {
+        console.log('Fetching...'); // debug line
+
+        return response.json()
+      })
+      .then(data => {
+        console.log(data); // Adicione essa linha para verificar o conteúdo de 'data'
+        // const list = document.getElementById('music-list');
+        const table = document.getElementById('fileTable2');
+        // Remove any existing items
+        while (table.rows.length > 1) { // Skip the header row, start from index 1
+          table.deleteRow(1); // Delete the row at index 1 repeatedly until no more rows left
+        }
+        // Add new items
+        data.forEach(job => {
+          var row = table.insertRow(-1);
+
+          var idCell = row.insertCell(0);
+          idCell.innerHTML = job.job_id;
+
+          var sizeCell = row.insertCell(1);
+          sizeCell.innerHTML = job.size;
+
+          // Add status cell
+          var timeCell = row.insertCell(2);
+          timeCell.innerHTML = job.time;
+
+          // Add download button cell
+          var musicCell = row.insertCell(3);
+          musicCell.innerHTML = job.music_id;
+
+          var trackCell = row.insertCell(4);
+          trackCell.innerHTML = job.track_id;
+
+
+          var getSingleJob = document.createElement("button");
+          getSingleJob.innerHTML = "Get Job Info";
+          getSingleJob.classList.add("button");
+
+          getSingleJob.onclick = function () {
+            console.log(`Item ${job.job_id} clicked!`);
+
+            id_selecionado = job.job_id;
+            fetch(`http://192.168.0.100:8000/job/` + id_selecionado)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then(data => {
+                console.log('Job Information:', data);
+                alert("this is working")
+                // Process the retrieved job information here
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+
+
+          };
+          row.appendChild(getSingleJob);
+        });
+
+        // title.classList.remove('escondido');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+
+  processButton.addEventListener('click', () => {
+    var musicID = document.getElementById("musicID").value;
+    var formData2 = new FormData();
+    formData2.append("file", file);
+    console.log(musicID);
+    fetch('http://192.168.0.100:8000/music/' + musicID, {
+      method: 'POST',
+      body: formData2,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
+  });
+
+  function uploadFile() {
+
+    var formData = new FormData();
+    formData.append("file", file);
+
+    // Create a new table row
+    var table = document.getElementById("fileTable");
+
+    fetch('http://192.168.0.100:8000/music', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          //allert sucess
+          alert("Upload request successful!")
+          return response.json();
+        } else {
+          //allert error
+          alert("Upload failed")
+          throw new Error('Upload failed.');
+        }
+      })
+      .then((data) => {
+        // Handle the response data
+        console.log(data);
+
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
+
+  }
+
+
+  function processFile(music, selectedCheckboxes) {
+    // Implement the download logic here
+    console.log("Processing file: " + music.music_id);
+    var tracks = [];
+    if (selectedCheckboxes.bass) {
+      tracks.push(0);
+    } if (selectedCheckboxes.drums) {
+      tracks.push(1);
+    } if (selectedCheckboxes.vocals) {
+      tracks.push(2);
+    } if (selectedCheckboxes.other) {
+      tracks.push(3);
+    }
+    console.log(tracks);
+    fetch(`http://192.168.0.100:8000/music/` + music.music_id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tracks)
+    })
+      .then(response => {
+        // Handle the response from the server
+        console.log('Response:', response);
+      
+        // Add your logic here to handle the response from the server
+        // remove hidden from respective download button
+        
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  function selectdownloadFile(musicID) {
+    // Implement the download logic here
+    console.log("Downloading file: " + musicID);
+    fetch(`http://192.168.0.100:8000/music/` + musicID, {
+      method: 'GET',
+    })
+    .then((response) => {
+        if (response.ok) {
+          //allert sucess
+          alert("Upload request successful!")
+          return response.json();
+        } else {
+          //allert error
+          alert("Upload failed")
+          throw new Error('Upload failed.');
+        }
+      })
+      .then((data) => {
+        // Handle the response data
+        console.log(data);
+        var download1 = document.getElementById("download1");
+        var download2 = document.getElementById("download2");
+        var download3 = document.getElementById("download3");
+        var download4 = document.getElementById("download4");
+        var download5 = document.getElementById("download5");
+        var music_selected = document.getElementById("music_selected");
+
+        music_selected.innerText = "Music Selected: " + musicID + " is at progress " + data.progress + "%";
+        instrumentArr = data.instruments
+        console.log(data)
+        var vals = Object.values(instrumentArr);
+        console.log(data.final)
+        for ( var i = 0; i < vals.length; i++) {
+          // get name
+          name = vals[i].name;
+          
+          if (name == "bass") {
+            download2.classList.remove('hidden');
+            download2.classList.add('block')
+            download2.value = musicID + "/" + name;
+          } else if (name == "drums") {
+            download3.classList.remove('hidden');
+            download3.classList.add('block')
+            download3.value = musicID + "/" + name;
+          } else if (name == "vocals") {
+            download4.classList.remove('hidden');
+            download4.classList.add('block')
+            download4.value = musicID + "/" + name;
+          } else if (name == "other") {
+            download5.classList.remove('hidden');
+            download5.classList.add('block')
+            download5.value = musicID + "/" + name;
+          } 
+        } 
+        if(data.final != ""){
+          download1.classList.remove('hidden');
+          download1.classList.add('block')
+          download1.value = musicID + "/final";
+        } else {
+          download1.classList.add('hidden');
+          download1.classList.remove('block')
+        }
+      })
+      
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
+    }
+
+    function downloadFile(index) {
+      console.log("Downloading file: " + index);
+      btnvalue = document.getElementById("download" + index).value;
+      console.log(btnvalue);
+      fetch(`http://192.168.0.100:8000/download/` + btnvalue, {
+        method: 'GET',
+      })
+      .then(response => {
+        // Convert the response to a Blob object
+        return response.blob();
+      })
+      .then(blob => {
+        // Create a URL for the Blob object
+        console.log(blob);
+        if (blob.type == "application/json") {
+          alert("File not available according to your selection");
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        // Create a link element and simulate a click to download the file
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = btnvalue.split("/")[1];
+        link.click();
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
+    }
+</script>
+
+</html>

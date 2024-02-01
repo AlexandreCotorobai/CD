@@ -1,0 +1,66 @@
+Todas as mensagens são precedidadas por 1 byte que indica a serialização e 4 bytes que indicam o tamanho da mensagem
+
+Format -> 4 bytes de tamanho (apenas da mensagem não inclui o byte de serialização)+ 1 byte de serialização + resto da mensagem
+-- Consumer --
+
+Topics request example:
+{
+    "type": "req_topics",
+}
+
+Topics response example:
+{
+    "type": "rep_topics",
+    "args":{
+        "topics": ["topic1","topic2"]
+    }
+}
+
+Subscribe message example:
+{
+    "type": "subscribe",
+    "args":{
+        "topic": "mytopic",
+        "serializer": Serializer.value (0,1,2)
+    }
+}
+
+Unsubscribe message example:
+{
+    "type": "unsubscribe",
+    "args":{
+        "topic": "mytopic",
+    }
+}
+
+-- Publisher --
+
+Create Topic message example:
+{
+    "type": "create_topic",
+    "args":{
+        "topic": "mytopic",
+    }
+}
+
+Publish message example:
+{
+    "type": "publish",
+    "args":{
+        "topic": "mytopic",
+        "data": "mydata"
+    }
+}
+
+-- Broker --
+
+Notify message example:
+{
+    "type": "notify",
+    "args":{
+        "topic": "mytopic",
+        "data": "mydata"
+    }
+}
+
+

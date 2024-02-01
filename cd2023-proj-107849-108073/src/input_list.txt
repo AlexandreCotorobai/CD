@@ -1,0 +1,4 @@
+file './tests/test_utils/temp_output/splitted/test-000.wav'
+file './tests/test_utils/temp_output/splitted/test-001.wav'
+file './tests/test_utils/temp_output/splitted/test-002.wav'
+file './tests/test_utils/temp_output/splitted/test-003.wav'

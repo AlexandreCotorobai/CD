@@ -1,0 +1,8 @@
+{
+    "API_IP": "localhost",
+    "API_PORT": 5000,
+    "NUM_OF_WORKERS": 4,
+    "WORKER_KEEP_ALIVE": 60,
+    "MANAGER_PORT": 5001,
+    "WORKER_PORT_START": 5002
+}

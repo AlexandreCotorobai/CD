@@ -1,0 +1,2 @@
+file './tracks/wavs/splits/test-000.wav'
+file './tracks/wavs/splits/test-001.wav'

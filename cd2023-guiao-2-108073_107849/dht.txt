@@ -1,0 +1,111 @@
+03-13 15:42:03 DHT          INFO     Node ID: 770; DHT: True; Successor: 770; Predecessor: None; FingerTable: None
+03-13 15:42:03 DHT          INFO     Node ID: 959; DHT: False; Successor: None; Predecessor: None; FingerTable: None
+03-13 15:42:03 Node 770     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5001), 'id': 959}}
+03-13 15:42:03 Node 770     DEBUG    Node join: {'addr': ('localhost', 5001), 'id': 959}
+03-13 15:42:03 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: None; FingerTable: None
+03-13 15:42:03 Node 959     DEBUG    O: {'method': 'JOIN_REP', 'args': {'successor_id': 770, 'successor_addr': ('localhost', 5000)}}
+03-13 15:42:03 Node 959     INFO     Node ID: 959; DHT: True; Successor: 770; Predecessor: None; FingerTable: None
+03-13 15:42:03 DHT          INFO     Node ID: 260; DHT: False; Successor: None; Predecessor: None; FingerTable: None
+03-13 15:42:03 Node 770     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5002), 'id': 260}}
+03-13 15:42:03 Node 770     DEBUG    Node join: {'addr': ('localhost', 5002), 'id': 260}
+03-13 15:42:03 Node 770     DEBUG    Find Successor(260)
+03-13 15:42:03 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: None; FingerTable: None
+03-13 15:42:03 Node 959     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5002), 'id': 260}}
+03-13 15:42:03 Node 959     DEBUG    Node join: {'addr': ('localhost', 5002), 'id': 260}
+03-13 15:42:03 Node 959     INFO     Node ID: 959; DHT: True; Successor: 260; Predecessor: None; FingerTable: None
+03-13 15:42:03 Node 260     DEBUG    O: {'method': 'JOIN_REP', 'args': {'successor_id': 770, 'successor_addr': ('localhost', 5000)}}
+03-13 15:42:03 Node 260     INFO     Node ID: 260; DHT: True; Successor: 770; Predecessor: None; FingerTable: None
+03-13 15:42:04 DHT          INFO     Node ID: 257; DHT: False; Successor: None; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 770     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5003), 'id': 257}}
+03-13 15:42:04 Node 770     DEBUG    Node join: {'addr': ('localhost', 5003), 'id': 257}
+03-13 15:42:04 Node 770     DEBUG    Find Successor(257)
+03-13 15:42:04 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 959     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5003), 'id': 257}}
+03-13 15:42:04 Node 959     DEBUG    Node join: {'addr': ('localhost', 5003), 'id': 257}
+03-13 15:42:04 Node 959     INFO     Node ID: 959; DHT: True; Successor: 257; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 257     DEBUG    O: {'method': 'JOIN_REP', 'args': {'successor_id': 260, 'successor_addr': ('localhost', 5002)}}
+03-13 15:42:04 Node 257     INFO     Node ID: 257; DHT: True; Successor: 260; Predecessor: None; FingerTable: None
+03-13 15:42:04 DHT          INFO     Node ID: 654; DHT: False; Successor: None; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 770     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5004), 'id': 654}}
+03-13 15:42:04 Node 770     DEBUG    Node join: {'addr': ('localhost', 5004), 'id': 654}
+03-13 15:42:04 Node 770     DEBUG    Find Successor(654)
+03-13 15:42:04 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 959     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5004), 'id': 654}}
+03-13 15:42:04 Node 959     DEBUG    Node join: {'addr': ('localhost', 5004), 'id': 654}
+03-13 15:42:04 Node 959     DEBUG    Find Successor(654)
+03-13 15:42:04 Node 959     INFO     Node ID: 959; DHT: True; Successor: 257; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 257     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5004), 'id': 654}}
+03-13 15:42:04 Node 257     DEBUG    Node join: {'addr': ('localhost', 5004), 'id': 654}
+03-13 15:42:04 Node 257     DEBUG    Find Successor(654)
+03-13 15:42:04 Node 257     INFO     Node ID: 257; DHT: True; Successor: 260; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 260     INFO     O: {'method': 'JOIN_REQ', 'args': {'addr': ('localhost', 5004), 'id': 654}}
+03-13 15:42:04 Node 260     DEBUG    Node join: {'addr': ('localhost', 5004), 'id': 654}
+03-13 15:42:04 Node 260     INFO     Node ID: 260; DHT: True; Successor: 654; Predecessor: None; FingerTable: None
+03-13 15:42:04 Node 654     DEBUG    O: {'method': 'JOIN_REP', 'args': {'successor_id': 770, 'successor_addr': ('localhost', 5000)}}
+03-13 15:42:04 Node 654     INFO     Node ID: 654; DHT: True; Successor: 770; Predecessor: None; FingerTable: None
+03-13 15:42:07 Node 959     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:07 Node 257     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:07 Node 770     INFO     O: {'method': 'STABILIZE', 'args': None}
+03-13 15:42:07 Node 770     DEBUG    Stabilize: None ('127.0.0.1', 5001)
+03-13 15:42:07 Node 959     INFO     O: {'method': 'STABILIZE', 'args': None}
+03-13 15:42:07 Node 959     DEBUG    Stabilize: None ('127.0.0.1', 5003)
+03-13 15:42:07 Node 654     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:07 Node 257     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}}
+03-13 15:42:07 Node 257     DEBUG    Notify: {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}
+03-13 15:42:07 Node 257     INFO     Node ID: 257; DHT: True; Successor: 260; Predecessor: 959; FingerTable: None
+03-13 15:42:07 Node 770     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:07 Node 260     INFO     O: {'method': 'STABILIZE', 'args': None}
+03-13 15:42:07 Node 959     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 770, 'predecessor_addr': ('localhost', 5000)}}
+03-13 15:42:07 Node 260     DEBUG    Stabilize: None ('127.0.0.1', 5004)
+03-13 15:42:07 Node 959     DEBUG    Notify: {'predecessor_id': 770, 'predecessor_addr': ('localhost', 5000)}
+03-13 15:42:07 Node 654     INFO     O: {'method': 'STABILIZE', 'args': None}
+03-13 15:42:07 Node 959     INFO     Node ID: 959; DHT: True; Successor: 257; Predecessor: 770; FingerTable: None
+03-13 15:42:07 Node 654     DEBUG    Stabilize: None ('127.0.0.1', 5000)
+03-13 15:42:07 Node 654     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 260, 'predecessor_addr': ('localhost', 5002)}}
+03-13 15:42:07 Node 654     DEBUG    Notify: {'predecessor_id': 260, 'predecessor_addr': ('localhost', 5002)}
+03-13 15:42:07 Node 654     INFO     Node ID: 654; DHT: True; Successor: 770; Predecessor: 260; FingerTable: None
+03-13 15:42:07 Node 770     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 654, 'predecessor_addr': ('localhost', 5004)}}
+03-13 15:42:07 Node 770     DEBUG    Notify: {'predecessor_id': 654, 'predecessor_addr': ('localhost', 5004)}
+03-13 15:42:07 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: 654; FingerTable: None
+03-13 15:42:10 Node 260     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:10 Node 257     INFO     O: {'method': 'STABILIZE', 'args': None}
+03-13 15:42:10 Node 257     DEBUG    Stabilize: None ('127.0.0.1', 5002)
+03-13 15:42:10 Node 260     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 257, 'predecessor_addr': ('localhost', 5003)}}
+03-13 15:42:10 Node 260     DEBUG    Notify: {'predecessor_id': 257, 'predecessor_addr': ('localhost', 5003)}
+03-13 15:42:10 Node 260     INFO     Node ID: 260; DHT: True; Successor: 654; Predecessor: 257; FingerTable: None
+03-13 15:42:10 Node 770     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:10 Node 654     INFO     O: {'method': 'STABILIZE', 'args': 654}
+03-13 15:42:10 Node 654     DEBUG    Stabilize: 654 ('127.0.0.1', 5000)
+03-13 15:42:10 Node 257     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:10 Node 959     INFO     O: {'method': 'STABILIZE', 'args': 959}
+03-13 15:42:10 Node 770     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 654, 'predecessor_addr': ('localhost', 5004)}}
+03-13 15:42:10 Node 959     DEBUG    Stabilize: 959 ('127.0.0.1', 5003)
+03-13 15:42:10 Node 770     DEBUG    Notify: {'predecessor_id': 654, 'predecessor_addr': ('localhost', 5004)}
+03-13 15:42:10 Node 770     INFO     Node ID: 770; DHT: True; Successor: 959; Predecessor: 654; FingerTable: None
+03-13 15:42:10 Node 257     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}}
+03-13 15:42:10 Node 257     DEBUG    Notify: {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}
+03-13 15:42:10 Node 257     INFO     Node ID: 257; DHT: True; Successor: 260; Predecessor: 959; FingerTable: None
+03-13 15:42:13 Node 654     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:13 Node 260     INFO     O: {'method': 'STABILIZE', 'args': 260}
+03-13 15:42:13 Node 260     DEBUG    Stabilize: 260 ('127.0.0.1', 5004)
+03-13 15:42:13 Node 654     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 260, 'predecessor_addr': ('localhost', 5002)}}
+03-13 15:42:13 Node 654     DEBUG    Notify: {'predecessor_id': 260, 'predecessor_addr': ('localhost', 5002)}
+03-13 15:42:13 Node 654     INFO     Node ID: 654; DHT: True; Successor: 770; Predecessor: 260; FingerTable: None
+03-13 15:42:13 Node 260     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:13 Node 257     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:13 Node 959     INFO     O: {'method': 'PREDECESSOR'}
+03-13 15:42:13 Node 257     INFO     O: {'method': 'STABILIZE', 'args': 257}
+03-13 15:42:13 Node 959     INFO     O: {'method': 'STABILIZE', 'args': 959}
+03-13 15:42:13 Node 770     INFO     O: {'method': 'STABILIZE', 'args': 770}
+03-13 15:42:13 Node 257     DEBUG    Stabilize: 257 ('127.0.0.1', 5002)
+03-13 15:42:13 Node 959     DEBUG    Stabilize: 959 ('127.0.0.1', 5003)
+03-13 15:42:13 Node 770     DEBUG    Stabilize: 770 ('127.0.0.1', 5001)
+03-13 15:42:13 Node 260     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 257, 'predecessor_addr': ('localhost', 5003)}}
+03-13 15:42:13 Node 260     DEBUG    Notify: {'predecessor_id': 257, 'predecessor_addr': ('localhost', 5003)}
+03-13 15:42:13 Node 959     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 770, 'predecessor_addr': ('localhost', 5000)}}
+03-13 15:42:13 Node 257     INFO     O: {'method': 'NOTIFY', 'args': {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}}
+03-13 15:42:13 Node 260     INFO     Node ID: 260; DHT: True; Successor: 654; Predecessor: 257; FingerTable: None
+03-13 15:42:13 Node 959     DEBUG    Notify: {'predecessor_id': 770, 'predecessor_addr': ('localhost', 5000)}
+03-13 15:42:13 Node 257     DEBUG    Notify: {'predecessor_id': 959, 'predecessor_addr': ('localhost', 5001)}
+03-13 15:42:13 Node 959     INFO     Node ID: 959; DHT: True; Successor: 257; Predecessor: 770; FingerTable: None
+03-13 15:42:13 Node 257     INFO     Node ID: 257; DHT: True; Successor: 260; Predecessor: 959; FingerTable: None
